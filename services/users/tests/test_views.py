@@ -22,7 +22,7 @@ class TestCreateUser:
         mock_create_user.assert_not_called()
 
     def test_returns_400_when_password_less_than_8_characters(self, client):
-        response = client.post(self.uri, {'email': 'test@test.es', 'password': '1234'})
+        response = client.post(self.uri, {'email': self.email, 'password': '1234'})
 
         assert response.status_code == 400
         assert 'password' in response.json() 
