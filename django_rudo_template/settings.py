@@ -32,7 +32,7 @@ ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS')
 # Application definition
 
 DJANGO_APPS = [
-    'django.contrib.admin',
+    'django_rudo_template.apps.MyAdminConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -45,7 +45,7 @@ THIRD_PARTY_APPS = [
 ]
 
 MY_APPS = [
-
+    'services.users'
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + MY_APPS
@@ -138,3 +138,5 @@ STATIC_URL = os.environ.get('DJANGO_STATIC_URL')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'users.User'
