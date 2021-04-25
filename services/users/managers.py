@@ -1,9 +1,7 @@
 from django.contrib.auth.models import UserManager as DjangoUserManager
-from django.utils.translation import gettext_lazy as _
 
 
 class UserManager(DjangoUserManager):
-
     def _create_user(self, email, password, **extra_fields):
         """
         Creates and saves a User with the given email and password.

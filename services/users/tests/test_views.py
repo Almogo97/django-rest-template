@@ -1,4 +1,3 @@
-from services.users.managers import UserManager
 import pytest
 
 
@@ -6,7 +5,7 @@ import pytest
 class TestCreateUser:
     uri = '/users/'
     email = 'test2@test.es'
-    password = '12345678'
+    password = 'qsd23fg098c'
 
     def test_returns_201(self, client, mock_create_user):
         response = client.post(self.uri, {'email': self.email, 'password': self.password})
@@ -21,8 +20,12 @@ class TestCreateUser:
         assert 'email' in response.json()
         mock_create_user.assert_not_called()
 
-    def test_returns_400_when_password_less_than_8_characters(self, client, mock_create_user):
-        response = client.post(self.uri, {'email': self.email, 'password': '1234'})
+    def test_returns_400_when_password_less_than_8_characters(
+            self, client, mock_create_user):
+        response = client.post(
+            self.uri,
+            {'email': self.email, 'password': '1234'},
+        )
 
         assert response.status_code == 400
         assert 'password' in response.json()
@@ -76,7 +79,11 @@ class TestUpdateMe:
 
     def test_returns_200(self, client_user, user):
         old_password = user.password
-        response = client_user.patch(self.uri, {'first_name': 'Test', 'password': '98765432'}, content_type='application/json')
+        response = client_user.patch(
+            self.uri,
+            {'first_name': 'Test', 'password': 'qsd23fg098c'},
+            content_type='application/json',
+        )
         user.refresh_from_db()
 
         assert response.status_code == 200

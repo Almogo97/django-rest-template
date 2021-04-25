@@ -25,9 +25,6 @@ class TestCreateUser:
 
     def test_raises_error_when_invalid_email(self):
         with pytest.raises(ValidationError) as e:
-            User.objects.create_user(
-                email='test',
-                password='test'
-            )
+            User.objects.create_user(email='test', password='test')
 
         assert 'email' in e.value.message_dict
