@@ -1,4 +1,5 @@
 import pytest
+
 from services.users.managers import UserManager
 
 

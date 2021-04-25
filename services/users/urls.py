@@ -1,4 +1,5 @@
 from rest_framework import routers
+
 from services.users import views
 
 router = routers.SimpleRouter()

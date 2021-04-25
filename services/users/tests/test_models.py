@@ -1,6 +1,7 @@
-from services.users.models import User
 import pytest
 from django.core.exceptions import ValidationError
+
+from services.users.models import User
 
 
 @pytest.mark.django_db

@@ -1,13 +1,10 @@
-from rest_framework import mixins, viewsets, status
+from rest_framework import mixins, status, viewsets
 from rest_framework.decorators import action
-from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 
 from services.users.models import User
-from services.users.serializers import (
-    UserSerializer,
-    RetrieveUserSerializer,
-)
+from services.users.serializers import RetrieveUserSerializer, UserSerializer
 
 
 class UserViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin):
