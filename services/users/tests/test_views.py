@@ -57,7 +57,7 @@ class TestDeleteMe:
     uri = '/users/me/'
 
     def test_returns_403_when_user_not_logged(self, client):
-        response = client.get(self.uri)
+        response = client.delete(self.uri)
 
         assert response.status_code == 403
 
@@ -73,7 +73,7 @@ class TestUpdateMe:
     uri = '/users/me/'
 
     def test_returns_403_when_user_not_logged(self, client):
-        response = client.get(self.uri)
+        response = client.patch(self.uri)
 
         assert response.status_code == 403
 
