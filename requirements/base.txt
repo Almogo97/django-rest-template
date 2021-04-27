@@ -1,3 +1,4 @@
 Django
+django-oauth-toolkit
 djangorestframework
 psycopg2-binary

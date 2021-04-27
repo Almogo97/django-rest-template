@@ -5,9 +5,12 @@ from services.users.models import User
 
 @pytest.fixture
 def user():
-    return User.objects.create(
+    user = User.objects.create_user(
         email='test@test.es',
     )
+    user.set_password('12345678A')
+    user.save()
+    return user
 
 
 @pytest.fixture

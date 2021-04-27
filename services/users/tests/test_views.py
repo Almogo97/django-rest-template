@@ -36,10 +36,10 @@ class TestCreateUser:
 class TestRetrieveMe:
     uri = '/users/me/'
 
-    def test_returns_403_when_user_not_logged(self, client):
+    def test_returns_401_when_user_not_logged(self, client):
         response = client.get(self.uri)
 
-        assert response.status_code == 403
+        assert response.status_code == 401
 
     def test_returns_200(self, client_user):
         response = client_user.get(self.uri)
@@ -56,10 +56,10 @@ class TestRetrieveMe:
 class TestDeleteMe:
     uri = '/users/me/'
 
-    def test_returns_403_when_user_not_logged(self, client):
+    def test_returns_401_when_user_not_logged(self, client):
         response = client.delete(self.uri)
 
-        assert response.status_code == 403
+        assert response.status_code == 401
 
     def test_returns_204(self, client_user):
         response = client_user.delete(self.uri)
@@ -72,10 +72,10 @@ class TestDeleteMe:
 class TestUpdateMe:
     uri = '/users/me/'
 
-    def test_returns_403_when_user_not_logged(self, client):
+    def test_returns_401_when_user_not_logged(self, client):
         response = client.patch(self.uri)
 
-        assert response.status_code == 403
+        assert response.status_code == 401
 
     def test_returns_200(self, client_user, user):
         old_password = user.password
