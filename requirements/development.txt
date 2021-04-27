@@ -1,5 +1,6 @@
 -r base.txt
 
+django-extensions
 flake8
 freezegun
 isort
