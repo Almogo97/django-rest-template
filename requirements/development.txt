@@ -1,6 +1,7 @@
 -r base.txt
 
 django-extensions
+django-queryinspect
 flake8
 freezegun
 isort
