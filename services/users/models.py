@@ -7,7 +7,7 @@ from .managers import UserManager
 
 class User(AbstractUser):
     email = models.EmailField(_('email address'), unique=True)
-    firebase_token = models.CharField(
+    firebase_id = models.CharField(
         _('firebase token'),
         max_length=255,
         null=True,

@@ -34,7 +34,7 @@ class UserAdmin(DjangoUserAdmin):
                     'is_superuser',
                     'groups',
                     'user_permissions',
-                    'firebase_token',
+                    'firebase_id',
                 ),
             },
         ),

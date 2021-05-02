@@ -91,7 +91,7 @@ class TestUpdateMe:
             'email': 'test@test.es',
             'first_name': 'Test',
             'last_name': '',
-            'firebase_token': None,
+            'firebase_id': None,
         }
         assert user.email == 'test@test.es'
         assert user.first_name == 'Test'

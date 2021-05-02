@@ -7,7 +7,7 @@ from services.users.models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('password', 'first_name', 'last_name', 'email', 'firebase_token')
+        fields = ('password', 'first_name', 'last_name', 'email', 'firebase_id')
         extra_kwargs = {'password': {'write_only': True}}
 
     def validate_password(self, value):
