@@ -19,9 +19,7 @@ class OAuthLibCore(oauth2_backends.OAuthLibCore):
         if request.content_type == 'application/json':
             try:
                 body = json.loads(request.body.decode("utf-8")).items()
-            except AttributeError:
-                body = ""
-            except ValueError:
+            except (AttributeError, ValueError):
                 body = ""
 
             return body
