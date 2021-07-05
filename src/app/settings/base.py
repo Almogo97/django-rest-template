@@ -158,4 +158,5 @@ OAUTH2_PROVIDER = {
     'OAUTH_SINGLE_ACCESS_TOKEN': True,
     'OAUTH_DELETE_EXPIRED': True,
     'OAUTH2_BACKEND_CLASS': 'app.oauth2_backends.OAuthLibCore',
+    'REFRESH_TOKEN_GRACE_PERIOD_SECONDS': 60 * 2,  # 2 minutes
 }
