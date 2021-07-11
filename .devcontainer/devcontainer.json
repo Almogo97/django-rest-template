@@ -35,6 +35,13 @@
 		"python.linting.pylintPath": "/usr/local/py-utils/bin/pylint",
 		"python.testing.pytestEnabled": true,
 		"python.testing.pytestArgs": ["src/"],
+		"files.associations": {
+			"**/*.html": "html",
+			"**/templates/**/*.html": "django-html",
+			"**/templates/**/*": "django-txt",
+			"**/requirements{/**,*}.{txt,in}": "pip-requirements"
+		},
+		"emmet.includeLanguages": {"django-html": "html"},
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
@@ -42,7 +49,8 @@
 		"ms-python.python",
 		"ms-python.vscode-pylance",
 		"mtxr.sqltools",
-		"mtxr.sqltools-driver-pg"
+		"mtxr.sqltools-driver-pg",
+		"batisteo.vscode-django",
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.

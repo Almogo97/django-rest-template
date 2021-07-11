@@ -1,4 +1,5 @@
 from django.contrib.auth.models import UserManager as DjangoUserManager
+from services.mail import send_templated_email
 
 
 class UserManager(DjangoUserManager):
@@ -13,6 +14,9 @@ class UserManager(DjangoUserManager):
         user.set_password(password)
         user.full_clean()
         user.save(using=self._db)
+
+        send_templated_email()
+
         return user
 
     def create_user(self, email, password=None, **extra_fields):

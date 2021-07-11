@@ -42,10 +42,12 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     'rest_framework',
     'oauth2_provider',
+    'django_rq',
 ]
 
 MY_APPS = [
     'services.users',
+    'services.mail',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + MY_APPS
@@ -159,4 +161,13 @@ OAUTH2_PROVIDER = {
     'OAUTH_DELETE_EXPIRED': True,
     'OAUTH2_BACKEND_CLASS': 'app.oauth2_backends.OAuthLibCore',
     'REFRESH_TOKEN_GRACE_PERIOD_SECONDS': 60 * 2,  # 2 minutes
+}
+
+
+RQ_QUEUES = {
+    'default': {
+        'HOST': os.environ.get('REDIS_HOST', 'localhost'),
+        'PORT': 6379,
+        'DB': 0,
+    }
 }
