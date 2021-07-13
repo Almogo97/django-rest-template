@@ -15,7 +15,7 @@ class UserManager(DjangoUserManager):
         user.full_clean()
         user.save(using=self._db)
 
-        send_templated_email()
+        send_templated_email('test', None, [email], 'welcome')
 
         return user
 

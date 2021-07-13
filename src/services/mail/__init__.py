@@ -36,7 +36,7 @@ def send_templated_email(subject, from_email, recipient_list, template,
     """
     Wrapper for send_email that gets the content of the message from a predefined template
     """
-    context = DEFAULT_CONTEXT | context
+    context = DEFAULT_CONTEXT | context if context else DEFAULT_CONTEXT
 
     message, html_message = _get_rendered_templates(template, context)
 
@@ -46,7 +46,7 @@ def send_templated_email(subject, from_email, recipient_list, template,
 
 
 def _get_rendered_template(template, extension, context):
-    return render_to_string(f'mail/{template}.{extension}', context)
+    return render_to_string(f'mail/welcome/{template}.{extension}', context)
 
 
 def _get_rendered_templates(template, context):

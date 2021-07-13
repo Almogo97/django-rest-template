@@ -47,9 +47,11 @@ services:
   rqworker:
     image: django-rest-template_devcontainer_app
     env_file: devcontainer.env
-    command: 'python manage.py rqworker'
+    command: 'python /workspace/src/manage.py rqworker'
     depends_on: 
       - app
+    volumes:
+      - ..:/workspace:ro
 
 volumes:
   postgres-data:
