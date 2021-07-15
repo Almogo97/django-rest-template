@@ -1,5 +1,7 @@
 import os
 
+import yaml
+from django.conf import settings
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django_rq import job
@@ -9,16 +11,12 @@ DEFAULT_CONTEXT = {
     'contact_mail': 'contact@test.com'
 }
 
-TEMPLATES = {
-    'test': {
-        'subject': 'This is a test mail',
-        'path': 'mail/test',
-    },
-    'welcome': {
-        'subject': 'Welcome to the app %(user)s!',
-        'path': 'mail/welcome'
-    }
-}
+
+with open(settings.BASE_DIR / "services/mail/templates.yml", 'r') as stream:
+    try:
+        TEMPLATES = yaml.safe_load(stream)
+    except yaml.YAMLError as exc:
+        print(exc)
 
 
 @job

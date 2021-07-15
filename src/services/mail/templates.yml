@@ -1,0 +1,7 @@
+test:
+  subject: This is a test mail
+  path: mail/test
+
+welcome:
+  subject: Welcome to the app %(user)s!
+  path: mail/welcome
