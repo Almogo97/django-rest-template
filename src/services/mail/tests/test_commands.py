@@ -8,5 +8,5 @@ class TestSendMail:
         call_command('sendmail', 'test@test.com', stdout=out, template='welcome')
         assert 'Email sent!' in out.getvalue()
         mock_send_templated_email.assert_called_once_with(
-            'test', ['test@test.com'], 'welcome', fail_silently=False
+            ['test@test.com'], 'welcome', fail_silently=False
         )
