@@ -2,6 +2,7 @@ import pytest
 
 
 @pytest.mark.django_db
+@pytest.mark.usefixtures('mock_send_templated_email')
 class TestCreateUser:
     uri = '/users/'
     email = 'test2@test.es'

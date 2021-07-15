@@ -1,6 +1,6 @@
 from django.contrib.auth.models import UserManager as DjangoUserManager
 
-from services.mail import send_templated_email
+from services import mail
 
 
 class UserManager(DjangoUserManager):
@@ -16,7 +16,7 @@ class UserManager(DjangoUserManager):
         user.full_clean()
         user.save(using=self._db)
 
-        send_templated_email([email], 'welcome')
+        mail.send_templated_email([email], 'welcome')
 
         return user
 

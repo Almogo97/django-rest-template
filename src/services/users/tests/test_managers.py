@@ -5,6 +5,7 @@ from services.users.models import User
 
 
 @pytest.mark.django_db
+@pytest.mark.usefixtures('mock_send_templated_email')
 class TestCreateUser:
     def test_creates_user(self):
         user = User.objects.create_user(

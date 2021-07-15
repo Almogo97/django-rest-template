@@ -29,6 +29,6 @@ Mail
 """
 
 
-@pytest.fixture(autouse=True)
+@pytest.fixture
 def mock_send_templated_email(mocker):
-    return mocker.patch('services.users.managers.send_templated_email')
+    return mocker.patch('services.mail.send_templated_email')
