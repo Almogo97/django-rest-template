@@ -19,5 +19,5 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         self.stdout.write(f'Using {settings.EMAIL_BACKEND}')
-        send_templated_email('test', None, options['emails'], options['template'])
+        send_templated_email('test', None, options['emails'], options['template'], fail_silently=False)
         self.stdout.write(self.style.SUCCESS('Email sent!'))
