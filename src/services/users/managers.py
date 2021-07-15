@@ -1,4 +1,5 @@
 from django.contrib.auth.models import UserManager as DjangoUserManager
+
 from services.mail import send_templated_email
 
 

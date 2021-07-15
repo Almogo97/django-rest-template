@@ -1,4 +1,5 @@
 import os
+
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django_rq import job

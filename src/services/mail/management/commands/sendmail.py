@@ -1,6 +1,7 @@
-from django.core.management.base import BaseCommand
-from services.mail import send_templated_email
 from django.conf import settings
+from django.core.management.base import BaseCommand
+
+from services.mail import send_templated_email
 
 
 class Command(BaseCommand):

@@ -2,7 +2,6 @@ import pytest
 
 from services.users.models import User
 
-
 """
 Users
 """
