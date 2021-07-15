@@ -1,0 +1,12 @@
+{% load static %}
+
+{% block header %}
+  <img src="{% static 'logo.png' %}" alt="logo">
+  <h1>{{ app_name }}</h1>
+{% endblock header %}
+
+{% block content %}{% endblock content %}
+
+{% block footer %}
+  <p>If you have any question contact us at <a href="mailto:{{ contact_mail }}">{{ contact_mail }}</a></p>
+{% endblock footer %}

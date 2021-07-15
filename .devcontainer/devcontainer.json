@@ -34,7 +34,14 @@
 		"python.linting.pydocstylePath": "/usr/local/py-utils/bin/pydocstyle",
 		"python.linting.pylintPath": "/usr/local/py-utils/bin/pylint",
 		"python.testing.pytestEnabled": true,
-		"python.testing.pytestArgs": ["src/"],
+		"python.testing.pytestArgs": ["src/", "-vv"],
+		"files.associations": {
+			"**/*.html": "html",
+			"**/templates/**/*.html": "django-html",
+			"**/templates/**/*": "django-txt",
+			"**/requirements{/**,*}.{txt,in}": "pip-requirements"
+		},
+		"emmet.includeLanguages": {"django-html": "html"},
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
@@ -42,14 +49,15 @@
 		"ms-python.python",
 		"ms-python.vscode-pylance",
 		"mtxr.sqltools",
-		"mtxr.sqltools-driver-pg"
+		"mtxr.sqltools-driver-pg",
+		"batisteo.vscode-django",
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [5000, 5432],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "pip install --user -r src/requirements/development.txt",
+	// "postCreateCommand": "pip install --user -r src/requirements/development.txt",
 
 	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode",

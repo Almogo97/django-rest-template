@@ -15,7 +15,6 @@ class TestLoginView:
             'password': password,
         }
 
-
     def test_returns_200_with_form_data(self, client, api):
         response = client.post(
             self.uri,

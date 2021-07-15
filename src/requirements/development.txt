@@ -3,6 +3,7 @@
 django-extensions
 django-queryinspect
 flake8
+flake8-isort
 freezegun
 isort
 pytest-django

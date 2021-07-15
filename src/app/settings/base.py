@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 
+TRUTHFUL_VALUES = ('True', 'true', 't', 'T', 1)
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
@@ -23,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DJANGO_DEBUG') == 'True'
+DEBUG = os.environ.get('DJANGO_DEBUG') in TRUTHFUL_VALUES
 
 ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS')
 
@@ -42,10 +44,12 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     'rest_framework',
     'oauth2_provider',
+    'django_rq',
 ]
 
 MY_APPS = [
     'services.users',
+    'services.mail',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + MY_APPS
@@ -160,3 +164,17 @@ OAUTH2_PROVIDER = {
     'OAUTH2_BACKEND_CLASS': 'app.oauth2_backends.OAuthLibCore',
     'REFRESH_TOKEN_GRACE_PERIOD_SECONDS': 60 * 2,  # 2 minutes
 }
+
+REDIS_DEBUG = os.environ.get('REDIS_DEBUG') in TRUTHFUL_VALUES
+
+RQ_QUEUES = {
+    'default': {
+        'HOST': os.environ.get('REDIS_HOST', 'localhost'),
+        'PORT': 6379,
+        'DB': 0,
+    }
+}
+
+if REDIS_DEBUG:
+    for queueConfig in RQ_QUEUES.values():
+        queueConfig['ASYNC'] = False

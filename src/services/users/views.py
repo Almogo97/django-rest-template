@@ -7,7 +7,7 @@ from services.users.models import User
 from services.users.serializers import RetrieveUserSerializer, UserSerializer
 
 
-class UserViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin):
+class UserViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     queryset = User.objects.all()
 
     def get_serializer_class(self):
