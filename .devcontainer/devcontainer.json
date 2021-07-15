@@ -34,7 +34,7 @@
 		"python.linting.pydocstylePath": "/usr/local/py-utils/bin/pydocstyle",
 		"python.linting.pylintPath": "/usr/local/py-utils/bin/pylint",
 		"python.testing.pytestEnabled": true,
-		"python.testing.pytestArgs": ["src/"],
+		"python.testing.pytestArgs": ["src/", "-vv"],
 		"files.associations": {
 			"**/*.html": "html",
 			"**/templates/**/*.html": "django-html",

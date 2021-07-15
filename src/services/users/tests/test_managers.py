@@ -8,16 +8,16 @@ from services.users.models import User
 class TestCreateUser:
     def test_creates_user(self):
         user = User.objects.create_user(
-            email='test2@test.es',
+            email='test2@test.com',
             password='test',
         )
 
-        assert user.email == 'test2@test.es'
+        assert user.email == 'test2@test.com'
         assert user.password.startswith('pbkdf2_sha256')
 
     def test_creates_user_with_extra_fields(self):
         user = User.objects.create_user(
-            email='test2@test.es',
+            email='test2@test.com',
             password='test',
             first_name='Test',
         )
@@ -29,3 +29,10 @@ class TestCreateUser:
             User.objects.create_user(email='test', password='test')
 
         assert 'email' in e.value.message_dict
+
+    def test_sends_welcome_mail(self, mock_send_templated_email):
+        User.objects.create_user(email='test2@test.com', password='test')
+
+        mock_send_templated_email.assert_called_once_with(
+           'test', None, ['test2@test.com'], 'welcome'
+        )
