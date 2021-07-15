@@ -46,7 +46,7 @@ def send_templated_email(subject, from_email, recipient_list, template,
 
 
 def _get_rendered_template(template, extension, context):
-    return render_to_string(f'mail/welcome/{template}.{extension}', context)
+    return render_to_string(f'mail/{template}/{template}.{extension}', context)
 
 
 def _get_rendered_templates(template, context):
