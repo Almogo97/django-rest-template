@@ -1,6 +1,7 @@
 from io import StringIO
 from django.core.management import call_command
 
+
 class TestSendMail:
     def test_sends_mail(self, mock_send_templated_email):
         out = StringIO()

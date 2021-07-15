@@ -6,6 +6,8 @@ from services.users.models import User
 """
 Users
 """
+
+
 @pytest.fixture
 def user():
     user = User.objects.create_user(

@@ -1,6 +1,4 @@
 from services.mail import send_templated_email
-from django_rq import get_worker
-import pytest
 
 
 # TODO convert from itegration test to unit test
