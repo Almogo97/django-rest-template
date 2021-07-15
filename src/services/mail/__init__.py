@@ -13,7 +13,7 @@ def _send_email(*args, **kwargs):
     send_mail(*args, **kwargs)
 
 
-def send_email(subject, message, from_email, recipient_list,
+def send_email(subject, message, recipient_list, from_email=None,
                fail_silently=False, auth_user=None, auth_password=None,
                connection=None, html_message=None):
     """
@@ -30,7 +30,7 @@ def send_email(subject, message, from_email, recipient_list,
                       connection, html_message)
 
 
-def send_templated_email(subject, from_email, recipient_list, template,
+def send_templated_email(subject, recipient_list, template, from_email=None,
                          fail_silently=False, auth_user=None, auth_password=None,
                          connection=None, context=None):
     """

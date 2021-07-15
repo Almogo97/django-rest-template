@@ -33,4 +33,4 @@ class TestCreateUser:
     def test_sends_welcome_mail(self, mock_send_templated_email):
         User.objects.create_user(email='test2@test.com', password='test')
 
-        mock_send_templated_email.assert_called_once_with('test', None, ['test2@test.com'], 'welcome')
+        mock_send_templated_email.assert_called_once_with('test', ['test2@test.com'], 'welcome')
