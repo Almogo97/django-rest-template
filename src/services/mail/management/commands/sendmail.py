@@ -12,7 +12,7 @@ class Command(BaseCommand):
             '-t',
             '--template',
             help='Select template to send in the email',
-            default='template',
+            default='welcome',
             type=str,
             # choices=,  TODO show all available templates
         )
