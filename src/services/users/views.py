@@ -25,6 +25,7 @@ class UserViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
     @me.mapping.patch
+    @me.mapping.put
     def update_me(self, request):
         serializer = self.get_serializer(request.user, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
