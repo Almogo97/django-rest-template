@@ -83,7 +83,6 @@ class TestUpdateMe:
         response = client_user.patch(
             self.uri,
             {'first_name': 'Test', 'password': 'qsd23fg098c'},
-            content_type='application/json',
         )
         user.refresh_from_db()
 
