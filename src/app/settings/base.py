@@ -178,3 +178,6 @@ RQ_QUEUES = {
 if REDIS_DEBUG:
     for queueConfig in RQ_QUEUES.values():
         queueConfig['ASYNC'] = False
+
+
+RECOVER_PASSWORD_CODE_LENGTH = 8
