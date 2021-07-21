@@ -41,7 +41,8 @@ class RecoverPasswordCode(models.Model):
     user = models.ForeignKey(
         User,
         models.CASCADE,
-        verbose_name=_('user')
+        verbose_name=_('user'),
+        unique=True,
     )
     created_at = models.DateTimeField(
         verbose_name=_('creation date'),
