@@ -37,7 +37,7 @@ class TestSendEmailWithRecoverPasswordCode:
             [email], 'recover_password_code', context={'code': 'mocked'}
         )
 
-    def test_does_not_send_email_if_user_does_not_exists(
+    def test_does_not_send_email_if_user_does_not_exist(
             self, mock_send_templated_email, mock_get_recover_password_code):
         send_email_with_recover_password_code('test@test.es')
 
