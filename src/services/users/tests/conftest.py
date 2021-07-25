@@ -20,5 +20,13 @@ def mock_get_recover_password_code(mocker):
 
 
 @pytest.fixture
+def mock_send_email_with_recover_password_code(mocker):
+    return mocker.patch.object(
+        business_logic,
+        'send_email_with_recover_password_code'
+    )
+
+
+@pytest.fixture
 def recover_password_code(user):
     return RecoverPasswordCode.objects.create(user=user)

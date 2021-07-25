@@ -97,3 +97,21 @@ class TestUpdateMe:
         assert user.first_name == 'Test'
         assert user.password.startswith('pbkdf2_sha256')
         assert user.password != old_password
+
+
+@pytest.mark.django_db
+class TestSendRecoverCodeEmail:
+    uri = '/users/recover_password/'
+
+    def test_returns_204(self, client, mock_send_email_with_recover_password_code):
+        email = 'test@test.es'
+        response = client.post(self.uri, {'email': email})
+
+        assert response.status_code == 204
+        mock_send_email_with_recover_password_code.assert_called_once_with(email)
+
+    def test_returns_400_when_email_format_is_not_valid(self, client):
+        response = client.post(self.uri, {'email': 'test'})
+
+        assert response.status_code == 400
+        assert 'email' in response.json()
