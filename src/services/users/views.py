@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from services.users import business_logic
 from services.users.models import User
 from services.users.serializers import (
+    ChangePasswordWithCodeSerializer,
     EmailSerializer,
     PasswordRecoverCodeSerializer,
     RetrieveUserSerializer,
@@ -41,12 +42,14 @@ class UserViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
 
 class UserRecoverPasswordViewSet(viewsets.GenericViewSet):
     queryset = User.objects.all()
-    serializer_class = EmailSerializer
 
     def get_serializer_class(self):
         if self.action == 'is_recover_password_code_valid':
             return PasswordRecoverCodeSerializer
-        return EmailSerializer
+        if self.action == 'change_password':
+            return ChangePasswordWithCodeSerializer
+        if self.action == 'recover_password':
+            return EmailSerializer
 
     @action(detail=False, methods=['post'])
     def recover_password(self, request):
@@ -64,4 +67,9 @@ class UserRecoverPasswordViewSet(viewsets.GenericViewSet):
 
     @action(detail=False, methods=['post'])
     def change_password(self, request):
-        raise NotImplementedError
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        business_logic.change_password_with_code(
+            code=serializer.data['code'],
+            password=serializer.data['password'])
+        return Response(status=status.HTTP_204_NO_CONTENT)

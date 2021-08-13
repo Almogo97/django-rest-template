@@ -40,3 +40,11 @@ def mock_is_password_recover_code_valid(mocker):
         business_logic,
         'is_password_recover_code_valid',
     )
+
+
+@pytest.fixture
+def mock_change_password_with_code(mocker):
+    return mocker.patch.object(
+        business_logic,
+        'change_password_with_code',
+    )

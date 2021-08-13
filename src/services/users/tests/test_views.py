@@ -137,3 +137,20 @@ class TestIsRecoverPasswordCodeValid:
         mock_is_password_recover_code_valid.assert_called_once_with('1234')
         assert response.status_code == 200
         assert response.json()['is_valid'] is False
+
+
+@pytest.mark.django_db
+class TestChangePassword:
+    uri = '/users/change_password/'
+
+    def test_returns_204(
+            self, client, mock_change_password_with_code,
+            mock_is_password_recover_code_valid):
+        mock_is_password_recover_code_valid.return_value = True
+        response = client.post(self.uri, {'code': '1234', 'password': 'new_password'})
+
+        mock_change_password_with_code.assert_called_once_with(
+            code='1234',
+            password='new_password',
+        )
+        assert response.status_code == 204

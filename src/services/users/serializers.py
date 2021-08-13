@@ -36,7 +36,7 @@ class RetrieveUserSerializer(UserSerializer):
 class PasswordField(serializers.CharField):
 
     def __init__(self, *args, **kwargs):
-        kwargs['write_only'] = True
+        kwargs['write_only'] = kwargs.pop('write_only', True)
         kwargs['style'] = {'input_type': 'password'}
         self.validate_password = kwargs.pop('validate_password', True)
         self.user = kwargs.pop('user', None)
@@ -50,7 +50,7 @@ class PasswordField(serializers.CharField):
         if not self.user and self.user_from_request:
             if self.context:
                 request = self.context.get('request')
-                if request.user.is_authenticated():
+                if request.user.is_authenticated:
                     self.user = request.user
         return self.user
 
@@ -71,3 +71,7 @@ class PasswordRecoverCodeSerializer(serializers.Serializer):
         if not business_logic.is_password_recover_code_valid(code):
             raise serializers.ValidationError(_('Code is not valid'))
         return code
+
+
+class ChangePasswordWithCodeSerializer(PasswordRecoverCodeSerializer):
+    password = PasswordField(write_only=False)
