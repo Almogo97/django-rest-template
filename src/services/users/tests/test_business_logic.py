@@ -3,6 +3,7 @@ from django.conf import settings
 from freezegun import freeze_time
 
 from services.users.business_logic import (
+    change_password_with_code,
     get_recover_password_code,
     is_password_recover_code_valid,
     send_email_with_recover_password_code
@@ -61,3 +62,14 @@ class TestIsPasswordRecoverCodeValid:
     @freeze_time('2000-01-01 12:30:01')
     def test_returns_false_when_code_has_expired(self, recover_password_code):
         assert is_password_recover_code_valid(recover_password_code) is False
+
+
+@pytest.mark.django_db
+class TestChangePasswordWithCode:
+    def test_changes_password_and_deletes_code(self, user, recover_password_code):
+        old_password = user.password
+        change_password_with_code(recover_password_code, 'new_password')
+
+        assert old_password != user.password
+        assert user.password.startswith('pbkdf2_sha256')
+        assert RecoverPasswordCode.objects.count() == 0

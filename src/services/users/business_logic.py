@@ -31,3 +31,12 @@ def is_password_recover_code_valid(code: Union[str, RecoverPasswordCode]) -> boo
         id=code,
         created_at__gte=time_limit,
     ).exists()
+
+
+def change_password_with_code(code: Union[str, RecoverPasswordCode], new_password: str):
+    code = code if isinstance(
+        code, RecoverPasswordCode) else RecoverPasswordCode.objects.get(id=code)
+    user = code.user
+    user.set_password(new_password)
+    user.save(update_fields=['password'])
+    code.delete()
