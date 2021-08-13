@@ -1,4 +1,5 @@
 import pytest
+from freezegun import freeze_time
 
 from services.users import business_logic
 from services.users.managers import UserManager
@@ -28,5 +29,6 @@ def mock_send_email_with_recover_password_code(mocker):
 
 
 @pytest.fixture
+@freeze_time('2000-01-01 12:00:00')
 def recover_password_code(user):
     return RecoverPasswordCode.objects.create(user=user)

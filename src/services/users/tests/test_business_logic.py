@@ -1,8 +1,10 @@
 import pytest
 from django.conf import settings
+from freezegun import freeze_time
 
 from services.users.business_logic import (
     get_recover_password_code,
+    is_password_recover_code_valid,
     send_email_with_recover_password_code
 )
 from services.users.models import RecoverPasswordCode
@@ -43,3 +45,19 @@ class TestSendEmailWithRecoverPasswordCode:
 
         mock_get_recover_password_code.assert_not_called()
         mock_send_templated_email.assert_not_called()
+
+
+@pytest.mark.django_db
+class TestIsPasswordRecoverCodeValid:
+
+    @freeze_time('2000-01-01 12:29:59')
+    def test_returns_true_when_code_exists_and_not_expired(self, recover_password_code):
+        assert is_password_recover_code_valid(recover_password_code) is True
+
+    @pytest.mark.usefixtures('recover_password_code')
+    def test_returns_false_when_code_does_not_exist(self):
+        assert is_password_recover_code_valid('1234') is False
+
+    @freeze_time('2000-01-01 12:30:01')
+    def test_returns_false_when_code_has_expired(self, recover_password_code):
+        assert is_password_recover_code_valid(recover_password_code) is False
