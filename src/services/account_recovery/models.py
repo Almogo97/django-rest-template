@@ -13,11 +13,10 @@ class RecoverPasswordCode(models.Model):
         default=generate_password_recover_code,
         editable=False,
     )
-    user = models.ForeignKey(
+    user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         models.CASCADE,
         verbose_name=_('user'),
-        unique=True,
     )
     created_at = models.DateTimeField(
         verbose_name=_('creation date'),
