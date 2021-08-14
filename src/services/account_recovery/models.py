@@ -3,7 +3,7 @@ from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from app.random import generate_password_recover_code
+from .utils import generate_password_recover_code
 
 
 class RecoverPasswordCode(models.Model):

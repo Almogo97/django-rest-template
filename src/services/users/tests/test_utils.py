@@ -1,6 +1,6 @@
 from django.conf import settings
 
-from app.random import generate_password_recover_code
+from services.account_recovery.utils import generate_password_recover_code
 
 
 class TestGeneratePasswordRecoverCode:
