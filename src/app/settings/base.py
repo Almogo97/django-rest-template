@@ -50,6 +50,7 @@ THIRD_PARTY_APPS = [
 MY_APPS = [
     'services.users',
     'services.mail',
+    'services.account_recovery',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + MY_APPS
@@ -178,3 +179,7 @@ RQ_QUEUES = {
 if REDIS_DEBUG:
     for queueConfig in RQ_QUEUES.values():
         queueConfig['ASYNC'] = False
+
+
+RECOVER_PASSWORD_CODE_LENGTH = 8
+RECOVER_PASSWORD_CODE_DURATION_SECONDS = 60 * 30  # 30 minutes
