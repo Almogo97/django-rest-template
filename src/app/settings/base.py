@@ -50,6 +50,7 @@ THIRD_PARTY_APPS = [
 MY_APPS = [
     'services.users',
     'services.mail',
+    'services.account_recovery',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + MY_APPS

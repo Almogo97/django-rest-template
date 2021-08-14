@@ -2,7 +2,7 @@ import pytest
 from django.conf import settings
 from django.db.utils import IntegrityError
 
-from services.users.models import RecoverPasswordCode
+from services.account_recovery.models import RecoverPasswordCode
 
 
 @pytest.mark.django_db

@@ -2,10 +2,14 @@ from datetime import timedelta
 from typing import Union
 
 from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.utils import timezone
 
 from services import mail
-from services.users.models import RecoverPasswordCode, User
+
+from .models import RecoverPasswordCode
+
+User = get_user_model()
 
 
 def get_recover_password_code(user) -> str:

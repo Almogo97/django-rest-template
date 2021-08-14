@@ -2,13 +2,13 @@ import pytest
 from django.conf import settings
 from freezegun import freeze_time
 
-from services.users.business_logic import (
+from services.account_recovery.business_logic import (
     change_password_with_code,
     get_recover_password_code,
     is_password_recover_code_valid,
     send_email_with_recover_password_code
 )
-from services.users.models import RecoverPasswordCode
+from services.account_recovery.models import RecoverPasswordCode
 
 
 @pytest.mark.django_db
