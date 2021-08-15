@@ -159,10 +159,10 @@ REST_FRAMEWORK = {
 
 
 OAUTH2_PROVIDER = {
-    'ACCESS_TOKEN_EXPIRE_SECONDS': 60 * 60,  # 1 hour
+    'ACCESS_TOKEN_EXPIRE_SECONDS': 60 * 60 * 10,  # 10 hours
     'OAUTH_SINGLE_ACCESS_TOKEN': True,
     'OAUTH_DELETE_EXPIRED': True,
-    'OAUTH2_BACKEND_CLASS': 'app.oauth2_backends.OAuthLibCore',
+    'OAUTH2_BACKEND_CLASS': 'services.oauth2.oauth2_backends.OAuthLibCore',
     'REFRESH_TOKEN_GRACE_PERIOD_SECONDS': 60 * 2,  # 2 minutes
 }
 
