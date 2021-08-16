@@ -6,7 +6,7 @@ from services.account_recovery.business_logic import (
     change_password_with_code,
     get_recover_password_code,
     is_password_recover_code_valid,
-    send_email_with_recover_password_code
+    send_email_with_recover_password_code,
 )
 from services.account_recovery.models import RecoverPasswordCode
 

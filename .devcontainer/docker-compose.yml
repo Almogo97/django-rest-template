@@ -48,7 +48,7 @@ services:
     image: django-rest-template_devcontainer_app
     env_file: devcontainer.env
     command: 'python /workspace/src/manage.py rqworker'
-    depends_on: 
+    depends_on:
       - app
     volumes:
       - ..:/workspace:ro

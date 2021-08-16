@@ -8,7 +8,7 @@ from services.account_recovery import business_logic
 from .serializers import (
     ChangePasswordWithCodeSerializer,
     EmailSerializer,
-    PasswordRecoverCodeSerializer
+    PasswordRecoverCodeSerializer,
 )
 
 User = get_user_model()
