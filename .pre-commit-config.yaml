@@ -1,0 +1,32 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+# Taken from https://github.com/jazzband/django-oauth-toolkit/
+repos:
+  # - repo: https://github.com/ambv/black
+  #   rev: 20.8b1
+  #   hooks:
+  #     - id: black
+  #       args: ['-S']
+  #       exclude: migrations/
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.0.1
+    hooks:
+      - id: check-ast
+      - id: trailing-whitespace
+      - id: check-merge-conflict
+      - id: check-json
+        exclude: ^(.devcontainer/|.vscode/)
+      - id: check-xml
+      - id: check-yaml
+      - id: mixed-line-ending
+        args: ['--fix=lf']
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.9.3
+    hooks:
+      - id: isort
+        exclude: migrations/
+  - repo: https://github.com/PyCQA/flake8
+    rev: 3.9.2
+    hooks:
+      - id: flake8
+        exclude: migrations/
