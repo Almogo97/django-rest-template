@@ -9,7 +9,7 @@
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
-		"terminal.integrated.defaultProfile.linux": "/bin/bash",
+		"terminal.integrated.defaultProfile.linux": "bash",
 		"terminal.integrated.cwd": "src/",
 		"sqltools.connections": [{
 			"name": "Container database",
@@ -34,7 +34,11 @@
 		"python.linting.pydocstylePath": "/usr/local/py-utils/bin/pydocstyle",
 		"python.linting.pylintPath": "/usr/local/py-utils/bin/pylint",
 		"python.testing.pytestEnabled": true,
-		"python.testing.pytestArgs": ["src/", "-vv"],
+		"python.testing.pytestArgs": [
+			"--rootdir",
+			"${workspaceFolder}/src",
+			"-vv"
+		],
 		"files.associations": {
 			"**/*.html": "html",
 			"**/templates/**/*.html": "django-html",
