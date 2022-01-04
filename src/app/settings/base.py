@@ -13,7 +13,12 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 
-TRUTHFUL_VALUES = ('True', 'true', 't', 'T', 1)
+import environ
+
+env = environ.Env(
+    DJANGO_DEBUG=(bool, False),
+    REDIS_DEBUG=(bool, False),
+)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -22,12 +27,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+SECRET_KEY = env('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DJANGO_DEBUG') in TRUTHFUL_VALUES
+DEBUG = env('DJANGO_DEBUG')
 
-ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS')
+ALLOWED_HOSTS = env('DJANGO_ALLOWED_HOSTS', list)
 
 
 # Application definition
@@ -94,11 +99,11 @@ WSGI_APPLICATION = 'app.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('POSTGRES_DB'),
-        'USER': os.environ.get('POSTGRES_USER'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
-        'HOST': os.environ.get('POSTGRES_HOST'),
-        'PORT': os.environ.get('POSTGRES_PORT', 5432),
+        'NAME': env('POSTGRES_DB'),
+        'USER': env('POSTGRES_USER'),
+        'PASSWORD': env('POSTGRES_PASSWORD'),
+        'HOST': env('POSTGRES_HOST'),
+        'PORT': env('POSTGRES_PORT', default=5432),
     }
 }
 
@@ -131,9 +136,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = os.environ.get('DJANGO_DEFAULT_LANGUAGE', 'en-US')
+LANGUAGE_CODE = env('DJANGO_DEFAULT_LANGUAGE', default='en-US')
 
-TIME_ZONE = os.environ.get('DJANGO_TIME_ZONE', 'UTC')
+TIME_ZONE = env('DJANGO_TIME_ZONE', default='UTC')
 
 USE_I18N = True
 
@@ -145,7 +150,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = os.environ.get('DJANGO_STATIC_URL')
+STATIC_URL = env('DJANGO_STATIC_URL')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -170,19 +175,16 @@ OAUTH2_PROVIDER = {
     'REFRESH_TOKEN_GRACE_PERIOD_SECONDS': 60 * 2,  # 2 minutes
 }
 
-REDIS_DEBUG = os.environ.get('REDIS_DEBUG') in TRUTHFUL_VALUES
+REDIS_DEBUG = env('REDIS_DEBUG')
 
 RQ_QUEUES = {
     'default': {
-        'HOST': os.environ.get('REDIS_HOST', 'localhost'),
-        'PORT': 6379,
+        'HOST': env('REDIS_HOST', default='localhost'),
+        'PORT': env('REDIS_PORT', default=6379),
         'DB': 0,
+        'ASYNC': REDIS_DEBUG
     }
 }
-
-if REDIS_DEBUG:
-    for queueConfig in RQ_QUEUES.values():
-        queueConfig['ASYNC'] = False
 
 
 RECOVER_PASSWORD_CODE_LENGTH = 8
