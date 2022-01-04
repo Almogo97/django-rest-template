@@ -1,4 +1,5 @@
 Django
+django-cors-headers
 django-environ
 django-oauth-toolkit
 django-rq
