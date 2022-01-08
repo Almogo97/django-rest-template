@@ -2,6 +2,7 @@
 
 django-extensions
 django-queryinspect
+django-rosetta
 flake8
 flake8-isort
 freezegun

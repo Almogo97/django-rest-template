@@ -17,9 +17,18 @@ from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
 
-urlpatterns = [
+_DJANGO_URL_PATTERNS = [
     path('admin/', admin.site.urls),
     path('auth/', include('oauth2_provider.urls', namespace='oauth2_provider')),
+]
+
+_THIRD_PARTY_URL_PATTERNS = [
+    path('rosetta/', include('rosetta.urls')),
+]
+
+_MY_URL_PATTERNS = [
     path('', include('services.users.urls')),
     path('', include('services.account_recovery.urls')),
 ]
+
+urlpatterns = _DJANGO_URL_PATTERNS + _THIRD_PARTY_URL_PATTERNS + _MY_URL_PATTERNS

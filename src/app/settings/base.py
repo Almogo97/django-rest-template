@@ -51,6 +51,7 @@ THIRD_PARTY_APPS = [
     'oauth2_provider',
     'django_rq',
     'corsheaders',
+    'rosetta',
 ]
 
 MY_APPS = [
@@ -64,6 +65,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + MY_APPS
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -182,7 +184,7 @@ RQ_QUEUES = {
         'HOST': env('REDIS_HOST', default='localhost'),
         'PORT': env('REDIS_PORT', default=6379),
         'DB': 0,
-        'ASYNC': REDIS_DEBUG
+        'ASYNC': REDIS_DEBUG,
     }
 }
 
