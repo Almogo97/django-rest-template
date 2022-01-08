@@ -39,6 +39,7 @@
 			"${workspaceFolder}/src",
 			"-vv"
 		],
+		"python.analysis.typeCheckingMode": "basic",
 		"files.associations": {
 			"**/*.html": "html",
 			"**/templates/**/*.html": "django-html",
