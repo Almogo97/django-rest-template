@@ -10,6 +10,7 @@ TODO:
 - separate test in unit and integration
 - remove rqworker and scheduler from containers and prefer to run locally
 - Configure logger
+- Third party admin
 
 # Notes
 
