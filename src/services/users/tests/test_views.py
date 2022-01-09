@@ -9,10 +9,14 @@ class TestCreateUser:
     password = 'qsd23fg098c'
 
     def test_returns_201(self, client, mock_create_user):
-        response = client.post(self.uri, {'email': self.email, 'password': self.password})
+        response = client.post(
+            self.uri, {'email': self.email, 'password': self.password}
+        )
 
         assert response.status_code == 201
-        mock_create_user.assert_called_once_with(email=self.email, password=self.password)
+        mock_create_user.assert_called_once_with(
+            email=self.email, password=self.password
+        )
 
     def test_returns_400_when_email_not_valid(self, client, mock_create_user):
         response = client.post(self.uri, {'email': 'test', 'password': self.password})
@@ -22,7 +26,8 @@ class TestCreateUser:
         mock_create_user.assert_not_called()
 
     def test_returns_400_when_password_less_than_8_characters(
-            self, client, mock_create_user):
+        self, client, mock_create_user
+    ):
         response = client.post(
             self.uri,
             {'email': self.email, 'password': '1234'},
@@ -91,7 +96,6 @@ class TestUpdateMe:
             'email': 'test@test.es',
             'first_name': 'Test',
             'last_name': '',
-            'firebase_id': None,
         }
         assert user.email == 'test@test.es'
         assert user.first_name == 'Test'

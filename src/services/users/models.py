@@ -1,4 +1,3 @@
-
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -8,12 +7,6 @@ from .managers import UserManager
 
 class User(AbstractUser):
     email = models.EmailField(_('email address'), unique=True)
-    firebase_id = models.CharField(
-        _('firebase token'),
-        max_length=255,
-        null=True,
-        blank=True,
-    )
 
     # Login with email
     username = None

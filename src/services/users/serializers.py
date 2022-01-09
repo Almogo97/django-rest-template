@@ -7,7 +7,7 @@ from services.users.models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('password', 'first_name', 'last_name', 'email', 'firebase_id')
+        fields = ('password', 'first_name', 'last_name', 'email')
         extra_kwargs = {'password': {'write_only': True}}
 
     def validate_password(self, value):
@@ -32,7 +32,6 @@ class RetrieveUserSerializer(UserSerializer):
 
 
 class PasswordField(serializers.CharField):
-
     def __init__(self, *args, **kwargs):
         kwargs['write_only'] = kwargs.pop('write_only', True)
         kwargs['style'] = {'input_type': 'password'}
