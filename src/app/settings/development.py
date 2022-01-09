@@ -2,13 +2,12 @@ from .base import *  # noqa
 
 INSTALLED_APPS += ['django_extensions']
 
-MIDDLEWARE += (
-    'qinspect.middleware.QueryInspectMiddleware',
-)
+MIDDLEWARE += ('qinspect.middleware.QueryInspectMiddleware',)
 
 QUERY_INSPECT_ENABLED = True
 
 LOGGING = {
+    'disable_existing_loggers': False,
     'version': 1,
     'handlers': {
         'console': {
