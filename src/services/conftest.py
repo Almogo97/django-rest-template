@@ -5,7 +5,7 @@ from django.utils import timezone
 from oauth2_provider.models import AccessToken
 from rest_framework.test import APIClient
 
-from services.users.models import User
+from services.users.entities import User
 
 """
 Helpers

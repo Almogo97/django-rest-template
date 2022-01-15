@@ -5,7 +5,7 @@ from django.contrib.auth.models import UserManager as DjangoUserManager
 from services import mail
 
 if TYPE_CHECKING:
-    from .models import User
+    from .entities import User
 
 
 class UserManager(DjangoUserManager):

@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractBaseUser
 from rest_framework import serializers
 from rest_framework.request import Request
 
-from services.users.models import User
+from services.users.entities import User
 
 
 class UserSerializer(serializers.ModelSerializer):

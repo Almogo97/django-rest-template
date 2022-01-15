@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.request import Request
 from rest_framework.response import Response
 
-from services.users.models import User
+from services.users.entities import User
 from services.users.serializers import RetrieveUserSerializer, UserSerializer
 
 

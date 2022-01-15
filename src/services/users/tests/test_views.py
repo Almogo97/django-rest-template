@@ -3,7 +3,7 @@ from unittest.mock import Mock
 import pytest
 from django.test.client import Client
 
-from services.users.models import User
+from services.users.entities import User
 
 
 @pytest.mark.django_db
