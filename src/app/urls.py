@@ -14,13 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, reverse_lazy
 from django.urls.conf import include
 from drf_spectacular.views import (
     SpectacularAPIView,
     SpectacularRedocView,
     SpectacularSwaggerView,
 )
+from django.views.generic.base import RedirectView
 
 _DJANGO_URL_PATTERNS = [
     path('admin/', admin.site.urls),
@@ -46,6 +47,7 @@ _THIRD_PARTY_URL_PATTERNS = [
 ]
 
 _MY_URL_PATTERNS = [
+    path('', RedirectView.as_view(url=reverse_lazy('admin:index'))),
     path('', include('services.users.urls')),
     path('', include('services.account_recovery.urls')),
 ]
