@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from .managers import UserManager
 
 
-class User(AbstractUser):
+class UserModel(AbstractUser):
     email = models.EmailField(_('email address'), unique=True)
 
     # Login with email
@@ -13,7 +13,7 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
-    objects = UserManager()
+    objects: UserManager = UserManager()
 
     class Meta:
         ordering = ('last_name', 'first_name')

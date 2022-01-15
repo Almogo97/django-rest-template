@@ -30,7 +30,8 @@ def send_email_with_recover_password_code(email):
 def is_password_recover_code_valid(code: Union[str, RecoverPasswordCode]) -> bool:
     code = code if isinstance(code, str) else code.id
     time_limit = timezone.now() - timedelta(
-        seconds=settings.RECOVER_PASSWORD_CODE_DURATION_SECONDS)
+        seconds=settings.RECOVER_PASSWORD_CODE_DURATION_SECONDS
+    )
     return RecoverPasswordCode.objects.filter(
         id=code,
         created_at__gte=time_limit,
@@ -38,8 +39,11 @@ def is_password_recover_code_valid(code: Union[str, RecoverPasswordCode]) -> boo
 
 
 def change_password_with_code(code: Union[str, RecoverPasswordCode], password: str):
-    code = code if isinstance(
-        code, RecoverPasswordCode) else RecoverPasswordCode.objects.get(id=code)
+    code = (
+        code
+        if isinstance(code, RecoverPasswordCode)
+        else RecoverPasswordCode.objects.get(id=code)
+    )
     user = code.user
     user.set_password(password)
     user.save(update_fields=['password'])

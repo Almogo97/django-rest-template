@@ -3,14 +3,14 @@ from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 from django.contrib.auth.models import Group
 from django.utils.translation import gettext_lazy as _
 
-from .models import User
+from .entities import User
 
 
 @admin.register(User)
 class UserAdmin(DjangoUserAdmin):
     list_display = ('email', 'first_name', 'last_name')
     search_fields = ('email', 'first_name', 'last_name')
-    ordering = None
+    ordering = ('last_name',)
 
     add_fieldsets = (
         (

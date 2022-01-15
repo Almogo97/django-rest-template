@@ -14,19 +14,40 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, reverse_lazy
 from django.urls.conf import include
+from django.views.generic.base import RedirectView
+from drf_spectacular.views import (
+    SpectacularAPIView,
+    SpectacularRedocView,
+    SpectacularSwaggerView,
+)
 
 _DJANGO_URL_PATTERNS = [
     path('admin/', admin.site.urls),
-    path('auth/', include('oauth2_provider.urls', namespace='oauth2_provider')),
 ]
 
 _THIRD_PARTY_URL_PATTERNS = [
+    # Django Oauth Toolkit
+    path('auth/', include('oauth2_provider.urls', namespace='oauth2_provider')),
+    # Rosetta
     path('rosetta/', include('rosetta.urls')),
+    # DRF Spectacular
+    path('schema/', SpectacularAPIView.as_view(), name='schema'),
+    path(
+        'schema/swagger/',
+        SpectacularSwaggerView.as_view(url_name='schema'),
+        name='swagger',
+    ),
+    path(
+        'schema/redoc/',
+        SpectacularRedocView.as_view(url_name='schema'),
+        name='redoc',
+    ),
 ]
 
 _MY_URL_PATTERNS = [
+    path('', RedirectView.as_view(url=reverse_lazy('admin:index'))),
     path('', include('services.users.urls')),
     path('', include('services.account_recovery.urls')),
 ]
