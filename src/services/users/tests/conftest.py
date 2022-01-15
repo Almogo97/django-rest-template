@@ -2,8 +2,8 @@ from unittest.mock import Mock
 
 import pytest
 
-from services.users.managers import UserManager
 from services.users.entities import User
+from services.users.managers import UserManager
 
 
 @pytest.fixture
