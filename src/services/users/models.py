@@ -13,7 +13,7 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
-    objects = UserManager()
+    objects: UserManager = UserManager()
 
     class Meta:
         ordering = ('last_name', 'first_name')

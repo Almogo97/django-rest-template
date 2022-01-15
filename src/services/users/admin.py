@@ -10,7 +10,7 @@ from .models import User
 class UserAdmin(DjangoUserAdmin):
     list_display = ('email', 'first_name', 'last_name')
     search_fields = ('email', 'first_name', 'last_name')
-    ordering = None
+    ordering = ('last_name',)
 
     add_fieldsets = (
         (

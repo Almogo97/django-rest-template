@@ -1,3 +1,5 @@
+from unittest.mock import Mock
+
 import pytest
 from django.core.exceptions import ValidationError
 
@@ -31,7 +33,7 @@ class TestCreateUser:
 
         assert 'email' in e.value.message_dict
 
-    def test_sends_welcome_mail(self, mock_send_templated_email):
+    def test_sends_welcome_mail(self, mock_send_templated_email: Mock):
         User.objects.create_user(email='test2@test.com', password='test')
 
         mock_send_templated_email.assert_called_once_with(['test2@test.com'], 'welcome')

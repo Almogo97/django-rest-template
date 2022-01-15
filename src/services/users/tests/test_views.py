@@ -1,4 +1,9 @@
+from unittest.mock import Mock
+
 import pytest
+from django.test.client import Client
+
+from services.users.models import User
 
 
 @pytest.mark.django_db
@@ -8,7 +13,7 @@ class TestCreateUser:
     email = 'test2@test.es'
     password = 'qsd23fg098c'
 
-    def test_returns_201(self, client, mock_create_user):
+    def test_returns_201(self, client: Client, mock_create_user: Mock):
         response = client.post(
             self.uri, {'email': self.email, 'password': self.password}
         )
@@ -18,7 +23,9 @@ class TestCreateUser:
             email=self.email, password=self.password
         )
 
-    def test_returns_400_when_email_not_valid(self, client, mock_create_user):
+    def test_returns_400_when_email_not_valid(
+        self, client: Client, mock_create_user: Mock
+    ):
         response = client.post(self.uri, {'email': 'test', 'password': self.password})
 
         assert response.status_code == 400
@@ -26,7 +33,7 @@ class TestCreateUser:
         mock_create_user.assert_not_called()
 
     def test_returns_400_when_password_less_than_8_characters(
-        self, client, mock_create_user
+        self, client: Client, mock_create_user: Mock
     ):
         response = client.post(
             self.uri,
@@ -42,12 +49,12 @@ class TestCreateUser:
 class TestRetrieveMe:
     uri = '/users/me/'
 
-    def test_returns_401_when_user_not_logged(self, client):
+    def test_returns_401_when_user_not_logged(self, client: Client):
         response = client.get(self.uri)
 
         assert response.status_code == 401
 
-    def test_returns_200(self, client_user):
+    def test_returns_200(self, client_user: Client):
         response = client_user.get(self.uri)
 
         assert response.status_code == 200
@@ -62,12 +69,12 @@ class TestRetrieveMe:
 class TestDeleteMe:
     uri = '/users/me/'
 
-    def test_returns_401_when_user_not_logged(self, client):
+    def test_returns_401_when_user_not_logged(self, client: Client):
         response = client.delete(self.uri)
 
         assert response.status_code == 401
 
-    def test_returns_204(self, client_user):
+    def test_returns_204(self, client_user: Client):
         response = client_user.delete(self.uri)
 
         assert response.status_code == 204
@@ -78,12 +85,12 @@ class TestDeleteMe:
 class TestUpdateMe:
     uri = '/users/me/'
 
-    def test_returns_401_when_user_not_logged(self, client):
+    def test_returns_401_when_user_not_logged(self, client: Client):
         response = client.patch(self.uri)
 
         assert response.status_code == 401
 
-    def test_returns_200(self, client_user, user):
+    def test_returns_200(self, client_user: Client, user: User):
         old_password = user.password
         response = client_user.patch(
             self.uri,

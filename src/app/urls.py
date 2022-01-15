@@ -16,12 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, reverse_lazy
 from django.urls.conf import include
+from django.views.generic.base import RedirectView
 from drf_spectacular.views import (
     SpectacularAPIView,
     SpectacularRedocView,
     SpectacularSwaggerView,
 )
-from django.views.generic.base import RedirectView
 
 _DJANGO_URL_PATTERNS = [
     path('admin/', admin.site.urls),
