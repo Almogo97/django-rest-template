@@ -51,6 +51,7 @@ THIRD_PARTY_APPS = [
     'django_rq',
     'corsheaders',
     'rosetta',
+    'drf_spectacular',
 ]
 
 MY_APPS = [
@@ -164,7 +165,8 @@ AUTH_USER_MODEL = 'users.User'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
-    )
+    ),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 
@@ -192,3 +194,17 @@ RECOVER_PASSWORD_CODE_LENGTH = 8
 RECOVER_PASSWORD_CODE_DURATION_SECONDS = 60 * 30  # 30 minutes
 
 CORS_ALLOW_ALL_ORIGINS = DEBUG
+
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'My API',
+    'DESCRIPTION': 'A description of my API',
+    'VERSION': '0.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    'OAUTH2_FLOWS': {'password'},
+    'OAUTH2_TOKEN_URL': '/auth/token/',
+    'OAUTH2_REFRESH_URL': '/auth/token/',
+    "SWAGGER_UI_SETTINGS": {
+        "persistAuthorization": True,
+    },
+}

@@ -4,5 +4,6 @@ django-environ
 django-oauth-toolkit
 django-rq
 djangorestframework
+drf-spectacular
 psycopg2-binary
 pyyaml

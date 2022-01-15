@@ -1,3 +1,4 @@
+from oauth2_provider.contrib.rest_framework.permissions import TokenHasReadWriteScope
 from rest_framework import mixins, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
@@ -15,7 +16,7 @@ class UserViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
             return RetrieveUserSerializer
         return UserSerializer
 
-    @action(detail=False, permission_classes=(IsAuthenticated,))
+    @action(detail=False, permission_classes=(IsAuthenticated, TokenHasReadWriteScope))
     def me(self, request):
         return Response(self.get_serializer(request.user).data)
 
