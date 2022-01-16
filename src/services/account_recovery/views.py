@@ -30,7 +30,8 @@ class UserRecoverPasswordViewSet(viewsets.GenericViewSet):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         business_logic.send_email_with_recover_password_code(
-            serializer.validated_data.get('email'))
+            serializer.validated_data.get('email')
+        )
         return Response(status=status.HTTP_204_NO_CONTENT)
 
     @action(detail=False, methods=['post'])
@@ -44,6 +45,6 @@ class UserRecoverPasswordViewSet(viewsets.GenericViewSet):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         business_logic.change_password_with_code(
-            code=serializer.data['code'],
-            password=serializer.data['password'])
+            code=serializer.data['code'], password=serializer.data['password']
+        )
         return Response(status=status.HTTP_204_NO_CONTENT)

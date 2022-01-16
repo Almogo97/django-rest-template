@@ -23,7 +23,9 @@ class TestSendRecoverCodeEmail:
 class TestIsRecoverPasswordCodeValid:
     uri = '/users/is_recover_password_code_valid/'
 
-    def test_returns_200_and_is_valid(self, client, mock_is_password_recover_code_valid):
+    def test_returns_200_and_is_valid(
+        self, client, mock_is_password_recover_code_valid
+    ):
         mock_is_password_recover_code_valid.return_value = True
         response = client.post(self.uri, {'code': '1234'})
 
@@ -32,7 +34,8 @@ class TestIsRecoverPasswordCodeValid:
         assert response.json()['is_valid'] is True
 
     def test_returns_200_and_is_invalid(
-            self, client, mock_is_password_recover_code_valid):
+        self, client, mock_is_password_recover_code_valid
+    ):
         mock_is_password_recover_code_valid.return_value = False
         response = client.post(self.uri, {'code': '1234'})
 
@@ -46,8 +49,11 @@ class TestChangePassword:
     uri = '/users/change_password/'
 
     def test_returns_204(
-            self, client, mock_change_password_with_code,
-            mock_is_password_recover_code_valid):
+        self,
+        client,
+        mock_change_password_with_code,
+        mock_is_password_recover_code_valid,
+    ):
         mock_is_password_recover_code_valid.return_value = True
         response = client.post(self.uri, {'code': '1234', 'password': 'new_password'})
 

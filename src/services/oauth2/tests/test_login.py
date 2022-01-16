@@ -16,18 +16,13 @@ class TestLoginView:
         }
 
     def test_returns_200_with_form_data(self, client, api):
-        response = client.post(
-            self.uri,
-            self.generate_request_body(api)
-        )
+        response = client.post(self.uri, self.generate_request_body(api))
 
         assert response.status_code == 200
 
     def test_returns_200_with_json_content(self, client, api):
         response = client.post(
-            self.uri,
-            self.generate_request_body(api),
-            content_type='application/json'
+            self.uri, self.generate_request_body(api), content_type='application/json'
         )
 
         assert response.status_code == 200
@@ -43,9 +38,6 @@ class TestLoginView:
     def test_returns_400_when_user_is_inactive(self, user, client, api):
         user.is_active = False
         user.save()
-        response = client.post(
-            self.uri,
-            self.generate_request_body(api)
-        )
+        response = client.post(self.uri, self.generate_request_body(api))
 
         assert response.status_code == 400

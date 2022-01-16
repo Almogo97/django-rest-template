@@ -12,7 +12,7 @@ from services.account_recovery.models import RecoverPasswordCode
 
 
 @pytest.mark.django_db
-class TestGetRecoverPasswordCode():
+class TestGetRecoverPasswordCode:
     def test_creates_code_if_it_does_not_exist(self, user):
         assert RecoverPasswordCode.objects.count() == 0
         get_recover_password_code(user)
@@ -31,7 +31,8 @@ class TestGetRecoverPasswordCode():
 @pytest.mark.django_db
 class TestSendEmailWithRecoverPasswordCode:
     def test_sends_email_if_user_exists(
-            self, user, mock_send_templated_email, mock_get_recover_password_code):
+        self, user, mock_send_templated_email, mock_get_recover_password_code
+    ):
         email = user.email
         send_email_with_recover_password_code(email)
 
@@ -41,7 +42,8 @@ class TestSendEmailWithRecoverPasswordCode:
         )
 
     def test_does_not_send_email_if_user_does_not_exist(
-            self, mock_send_templated_email, mock_get_recover_password_code):
+        self, mock_send_templated_email, mock_get_recover_password_code
+    ):
         send_email_with_recover_password_code('test@test.es')
 
         mock_get_recover_password_code.assert_not_called()
@@ -50,7 +52,6 @@ class TestSendEmailWithRecoverPasswordCode:
 
 @pytest.mark.django_db
 class TestIsPasswordRecoverCodeValid:
-
     @freeze_time('2000-01-01 12:29:59')
     def test_returns_true_when_code_exists_and_not_expired(self, recover_password_code):
         assert is_password_recover_code_valid(recover_password_code) is True
